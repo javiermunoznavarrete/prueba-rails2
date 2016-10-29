@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :item
+	has_many :items, dependents: => :destroy
 
 	validates :name, presence: true
 	validates :email, uniqueness: true
@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
 	before_save :first_mayus
 
 	def first_mayus
-		:name.capitalize
+		self.name = self.name.capitalize
 	end
+
+
+
 end
